@@ -1,0 +1,21 @@
+.loading-wrap {
+	min-height: 100svh;
+	display: grid;
+	place-items: center;
+}
+
+.loading-image {
+	width: min(300px, 70vw);
+	height: auto;
+	animation: spin 2.2s linear infinite;
+	will-change: transform;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
