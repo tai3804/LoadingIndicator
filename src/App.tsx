@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import "./App.css"
 
 const loadingIndicators: { name: string; src: string }[] = [
+  { name: "Chị Xuyến", src: "/chiXuyen.png" },
   { name: "Bao", src: "/bao.jpeg" },
   { name: "Giang", src: "/giang.jpeg" },
   { name: "Hiep", src: "/hiep.jpeg" },
