@@ -1,14 +1,195 @@
-.loading-wrap {
+.app-shell {
 	min-height: 100svh;
+	padding: 32px;
+	box-sizing: border-box;
+	background:
+		radial-gradient(circle at top left, rgba(255, 196, 90, 0.28), transparent 30%),
+		radial-gradient(circle at top right, rgba(112, 181, 255, 0.22), transparent 26%),
+		linear-gradient(180deg, #fffaf2 0%, #fff 52%, #f7f5ef 100%);
+	color: #18151f;
+	display: grid;
+	gap: 24px;
+}
+
+.hero-card,
+.selection-panel,
+.preview-panel {
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: blur(18px);
+	border: 1px solid rgba(24, 21, 31, 0.08);
+	border-radius: 28px;
+	box-shadow: 0 24px 60px rgba(25, 18, 40, 0.1);
+}
+
+.hero-card {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 28px;
+}
+
+.eyebrow {
+	margin: 0 0 10px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	color: #8a5b15;
+}
+
+.hero-card h1 {
+	margin: 0;
+	font-size: clamp(2rem, 5vw, 4.5rem);
+	line-height: 0.95;
+	max-width: 12ch;
+	color: #171321;
+}
+
+.description {
+	max-width: 54ch;
+	margin-top: 14px;
+	font-size: 1rem;
+	line-height: 1.6;
+	color: #5f586d;
+}
+
+.description span {
+	font-weight: 700;
+	color: #171321;
+}
+
+.toggle-button {
+	border: 0;
+	border-radius: 999px;
+	padding: 14px 22px;
+	font: inherit;
+	font-weight: 700;
+	color: #fff;
+	background: linear-gradient(135deg, #1f2937, #7c3aed);
+	box-shadow: 0 16px 30px rgba(124, 58, 237, 0.28);
+	cursor: pointer;
+	transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.toggle-button:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 18px 34px rgba(124, 58, 237, 0.32);
+}
+
+.content-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+	gap: 24px;
+}
+
+.selection-panel,
+.preview-panel {
+	padding: 24px;
+}
+
+.panel-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 18px;
+}
+
+.panel-header h2 {
+	margin: 0;
+	font-size: 1.25rem;
+	color: #171321;
+}
+
+.panel-header span {
+	font-size: 0.92rem;
+	color: #756d82;
+}
+
+.indicator-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.indicator-card {
+	border: 1px solid rgba(24, 21, 31, 0.08);
+	border-radius: 20px;
+	padding: 12px;
+	background: rgba(255, 255, 255, 0.86);
+	cursor: pointer;
+	display: grid;
+	gap: 10px;
+	justify-items: center;
+	font: inherit;
+	color: #2a2434;
+	transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.indicator-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 14px 24px rgba(30, 23, 42, 0.08);
+}
+
+.indicator-card.active {
+	border-color: rgba(124, 58, 237, 0.55);
+	box-shadow: 0 16px 28px rgba(124, 58, 237, 0.16);
+}
+
+.indicator-thumb {
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: 16px;
+}
+
+.preview-panel {
+	display: grid;
+	align-content: start;
+}
+
+.loading-wrap {
+	min-height: 420px;
 	display: grid;
 	place-items: center;
+	text-align: center;
+	gap: 18px;
+	padding: 20px;
 }
 
 .loading-image {
-	width: min(300px, 70vw);
+	width: min(340px, 70vw);
 	height: auto;
+	border-radius: 50%;
 	animation: spin 2.2s linear infinite;
 	will-change: transform;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.idle-state {
+	min-height: 420px;
+	display: grid;
+	place-items: center;
+	text-align: center;
+	gap: 10px;
+	color: #6f667d;
+	border: 1px dashed rgba(24, 21, 31, 0.14);
+	border-radius: 24px;
+	background: rgba(255, 255, 255, 0.42);
+}
+
+.idle-state p,
+.loading-wrap p {
+	margin: 0;
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: #171321;
+}
+
+.idle-state span,
+.loading-wrap span {
+	font-size: 0.96rem;
 }
 
 @keyframes spin {
@@ -17,5 +198,42 @@
 	}
 	to {
 		transform: rotate(360deg);
+	}
+}
+
+@media (max-width: 960px) {
+	.app-shell {
+		padding: 18px;
+	}
+
+	.hero-card,
+	.content-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.hero-card {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.indicator-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.loading-wrap,
+	.idle-state {
+		min-height: 300px;
+	}
+}
+
+@media (max-width: 560px) {
+	.indicator-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.selection-panel,
+	.preview-panel,
+	.hero-card {
+		padding: 18px;
 	}
 }
