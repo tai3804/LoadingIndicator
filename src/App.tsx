@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import "./App.css"
 
-const loadingIndicators = [
+const loadingIndicators: { name: string; src: string }[] = [
   { name: "Bao", src: "/bao.jpeg" },
   { name: "Giang", src: "/giang.jpeg" },
   { name: "Hiep", src: "/hiep.jpeg" },
@@ -10,7 +10,7 @@ const loadingIndicators = [
   { name: "Truong", src: "/truong.jpeg" },
   { name: "Tuan", src: "/tuan.jpeg" },
   { name: "Tue", src: "/tue.jpeg" },
-] as const
+]
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false)
@@ -39,7 +39,21 @@ export default function App() {
     <>
       <audio ref={audioRef} src="/audio.MP3" loop preload="auto" hidden />
       <main className="app-shell">
-        <button className="toggle-button" onClick={() => setIsLoading(!isLoading)}>
+        <button
+          className="toggle-button"
+          onClick={() => {
+            const next = !isLoading
+            setIsLoading(next)
+            if (next) {
+              void audioRef.current?.play().catch(() => {
+                // ignore
+              })
+            } else {
+              audioRef.current?.pause()
+              if (audioRef.current) audioRef.current.currentTime = 0
+            }
+          }}
+        >
           {isLoading ? "Tắt loading" : "Bật loading"}
         </button>
         <section className="content-grid">
